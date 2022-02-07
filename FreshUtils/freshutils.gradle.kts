@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
- * Copyright (c) 2019 Ganom <https://github.com/Ganom>
+ * Copyright (c) 2019 fresh_mozz
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

@@ -27,7 +27,7 @@ open class BootstrapTask : DefaultTask() {
     private fun getBootstrap(): JSONArray? {
         val client = OkHttpClient()
 
-        val url = "https://raw.githubusercontent.com/ganom/ExternalPlugins/master/plugins.json"
+        val url = "https://github.com/fresh-mozzarella/FreshMozzExternals/master/plugins.json"
         val request = Request.Builder()
                 .url(url)
                 .build()
