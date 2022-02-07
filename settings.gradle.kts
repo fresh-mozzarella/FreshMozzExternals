@@ -25,8 +25,8 @@
 
 rootProject.name = "external plugins example"
 
-include(":kotlinexample")
-include(":javaexample")
+include(":PresetManager")
+include(":FreshUtils")
 
 for (project in rootProject.children) {
     project.apply {
