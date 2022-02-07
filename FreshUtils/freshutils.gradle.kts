@@ -24,7 +24,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.1.1"
+version = "1.2.0"
 
 project.extra["PluginName"] = "FreshUtils"
 project.extra["PluginDescription"] = "Cross-Plugin Utilities"

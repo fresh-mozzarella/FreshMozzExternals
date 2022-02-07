@@ -17,7 +17,7 @@ subprojects {
     group = "com.openosrs"
 
     project.extra["PluginProvider"] = "fresh_mozzarella"
-    project.extra["ProjectSupportUrl"] = "https://github.com/fresh-mozzarella/FreshMozzExternals"
+    project.extra["ProjectUrl"] = "https://github.com/fresh-mozzarella/FreshMozzExternals"
     project.extra["PluginLicense"] = "GNU General Public License v3.0"
 
     repositories {
