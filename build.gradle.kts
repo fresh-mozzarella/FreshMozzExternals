@@ -55,7 +55,7 @@ subprojects {
     apply<JavaPlugin>()
     apply<JavaLibraryPlugin>()
 
-    val oprsVersion = "4.19.0"
+    val oprsVersion = "4.25.0"
     dependencies {
         annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.16")
         annotationProcessor(group = "org.pf4j", name = "pf4j", version = "3.5.0")
