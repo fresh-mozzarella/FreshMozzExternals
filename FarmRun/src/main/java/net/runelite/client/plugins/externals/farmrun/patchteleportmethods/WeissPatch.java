@@ -1,13 +1,12 @@
-package net.runelite.client.plugins.externals.farmrun.teleportlocations;
+package net.runelite.client.plugins.externals.farmrun.patchteleportmethods;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum TrollStronghold {
-    POH_PORTAL("PoH Portal"),
-    RUNES("Runes");
+public enum WeissPatch {
+    ICY_BASALT("Icy Basalt");
 
     private final String name;
 

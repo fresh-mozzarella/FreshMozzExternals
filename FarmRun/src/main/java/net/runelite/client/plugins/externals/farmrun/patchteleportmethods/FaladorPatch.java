@@ -1,14 +1,12 @@
-package net.runelite.client.plugins.externals.farmrun.teleportlocations;
+package net.runelite.client.plugins.externals.farmrun.patchteleportmethods;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Falador {
-    RUNES("Runes"),
-    TELEPORT_TABLET("Teleport Tablet"),
-    POH_PORTAL("PoH Portal"),
+public enum FaladorPatch {
+    FALADOR_TELEPORT("Falador Teleport"),
     EXPLORERS_RING("Explorer's Ring");
 
     private final String name;

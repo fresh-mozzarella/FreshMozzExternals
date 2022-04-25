@@ -1,12 +1,13 @@
-package net.runelite.client.plugins.externals.farmrun.teleportlocations;
+package net.runelite.client.plugins.externals.farmrun.patchteleportmethods;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Weiss {
-    POH_PORTAL("PoH_Portal");
+public enum FarmingGuildPatch {
+    SKILLS_NECKLACE("Skills Necklace"),
+    FAIRY_RING("Fairy Ring");
 
     private final String name;
 

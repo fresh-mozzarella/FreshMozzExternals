@@ -3,6 +3,7 @@ package net.runelite.client.plugins.externals.farmrun;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameTick;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.Plugin;
@@ -23,6 +24,13 @@ public class FarmRun extends Plugin
     @Inject
     private FarmRunConfig config;
 
+
+//    FarmRunState state;
+
+
+
+    boolean startFarmRun;
+
     @Provides
     FarmRunConfig provideConfig(ConfigManager configManager)
     {
@@ -32,15 +40,32 @@ public class FarmRun extends Plugin
     @Override
     protected void startUp() {
         log.info("Plugin Started");
-
-        if (config.isFaladorEnabled()) {
-            log.info("The value of 'config.isFaladorEnabled()' is ${config.isFaladorEnabled()}");
-        }
     }
     @Override
     protected void shutDown() {
         log.info("Plugin Stopped");
     }
+
+    @Subscribe
+    private void onConfigButtonPressed (ConfigButtonClicked configButtonClicked)
+    {
+        if (!configButtonClicked.getGroup().equalsIgnoreCase("FarmRun"))
+        {
+            return;
+        }
+        log.info("button {} pressed!", configButtonClicked.getKey());
+        if (configButtonClicked.getKey().equals("startButton")) {
+            if (!startFarmRun) {
+                startFarmRun = true;
+//                botTimer = Instant.now();
+
+            }
+        }
+    }
+
+
+
+
 
     @Subscribe
     private void onGameTick(GameTick gameTick){
