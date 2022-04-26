@@ -1,12 +1,12 @@
-package net.runelite.client.plugins.externals.farmrun;
+package net.runelite.client.plugins.externals.farmrun.ui;
 
 import net.runelite.client.config.*;
-import net.runelite.client.plugins.externals.farmrun.seeds.AllotmentSeeds;
-import net.runelite.client.plugins.externals.farmrun.seeds.HerbSeeds;
-import net.runelite.client.plugins.externals.farmrun.patchteleportmethods.ArdougnePatch;
-import net.runelite.client.plugins.externals.farmrun.patchteleportmethods.CatherbyPatch;
-import net.runelite.client.plugins.externals.farmrun.patchteleportmethods.FaladorPatch;
-import net.runelite.client.plugins.externals.farmrun.patchteleportmethods.PortPhasmatysPatch;
+import net.runelite.client.plugins.externals.farmrun.ui.seeds.AllotmentSeeds;
+import net.runelite.client.plugins.externals.farmrun.ui.seeds.HerbSeeds;
+import net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods.ArdougnePatch;
+import net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods.CatherbyPatch;
+import net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods.FaladorPatch;
+import net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods.PortPhasmatysPatch;
 
 
 @ConfigGroup("FarmRun")

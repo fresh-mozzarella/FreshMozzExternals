@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.externals.farmrun.seeds;
+package net.runelite.client.plugins.externals.farmrun.ui.seeds;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
