@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum XericsTalisman {
-    XERICS_TALISMAN("Xeric's Talisman");
+    XERICS_TALISMAN("Xeric's Talisman"),
+    POH("PoH (Mounted xeric's talisman)");
 
     private String name;
 
