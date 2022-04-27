@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods;
+package net.runelite.client.plugins.externals.farmrun.patchteleportmethods;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.externals.farmrun.ui.teleports;
+package net.runelite.client.plugins.externals.farmrun.teleports;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

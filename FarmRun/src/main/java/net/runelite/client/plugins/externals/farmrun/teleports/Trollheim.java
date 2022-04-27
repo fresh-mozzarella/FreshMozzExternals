@@ -1,13 +1,12 @@
-package net.runelite.client.plugins.externals.farmrun.ui.teleports;
+package net.runelite.client.plugins.externals.farmrun.teleports;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
-public enum Camelot {
+@AllArgsConstructor
+public enum Trollheim {
     RUNES("Runes"),
-    TELEPORT_TAB("Teleport Tab"),
     POH_PORTAL("PoH Portal");
 
     private String name;

@@ -5,4 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BankTask {
 
+    enum BankingState {
+        NONE,
+        CLICK_BANK,
+        WAIT_BANK,
+        QUANTITY,
+
+
+    }
 }

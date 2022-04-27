@@ -7,17 +7,19 @@ import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.externals.farmrun.Location;
 import net.runelite.client.plugins.externals.farmrun.Runes;
-import net.runelite.client.plugins.externals.farmrun.ui.FarmRunConfig;
-import net.runelite.client.plugins.externals.farmrun.ui.teleports.Glory;
-import net.runelite.client.plugins.externals.farmrun.ui.teleports.PoH;
-import net.runelite.client.plugins.externals.farmrun.ui.teleports.SkillsNecklace;
-import net.runelite.client.plugins.externals.farmrun.ui.teleports.XericsTalisman;
+import net.runelite.client.plugins.externals.farmrun.FarmRunConfig;
+import net.runelite.client.plugins.externals.farmrun.teleports.Glory;
+import net.runelite.client.plugins.externals.farmrun.teleports.PoH;
+import net.runelite.client.plugins.externals.farmrun.teleports.SkillsNecklace;
+import net.runelite.client.plugins.externals.farmrun.teleports.XericsTalisman;
 
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static net.runelite.client.plugins.externals.utils.InventoryUtils.hasItems;
 
 @Slf4j
 public class TeleportTask {
@@ -71,7 +73,7 @@ public class TeleportTask {
 
 
     @Inject
-    TeleportTask()
+    TeleportTask(FarmRunConfig farmRunConfig, FarmRunConfig farmRunConfig1, Client client, ItemManager itemManager),
 
 
 

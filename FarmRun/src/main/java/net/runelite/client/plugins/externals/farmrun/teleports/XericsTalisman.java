@@ -1,15 +1,15 @@
-package net.runelite.client.plugins.externals.farmrun.ui.patchteleportmethods;
+package net.runelite.client.plugins.externals.farmrun.teleports;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum HosidiusPatch {
+public enum XericsTalisman {
     XERICS_TALISMAN("Xeric's Talisman"),
-    TELEPORT_TO_HOUSE("Teleport to house");
+    POH("PoH (Mounted xeric's talisman)");
 
-    private final String name;
+    private String name;
 
     @Override
     public String toString() { return name; }
