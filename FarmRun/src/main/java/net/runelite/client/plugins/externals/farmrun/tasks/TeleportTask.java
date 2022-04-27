@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.runelite.client.plugins.externals.utils.InventoryUtils.hasItems;
+import static net.runelite.client.plugins.externals.InventoryUtils.hasItems;
 
 @Slf4j
 public class TeleportTask {

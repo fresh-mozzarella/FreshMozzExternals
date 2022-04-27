@@ -3,7 +3,7 @@
  * All rights reserved.
  * Licensed under GPL3, see LICENSE for the full scope.
  */
-package net.runelite.client.plugins.externals.utils;
+package net.runelite.client.plugins.externals;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

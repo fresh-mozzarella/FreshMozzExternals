@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.externals.utils;
+package net.runelite.client.plugins.externals;
 
 import net.runelite.api.Client;
 import net.runelite.api.VarClientInt;
@@ -27,8 +27,6 @@ public class InventoryUtils {
 
         return inventory.getDynamicChildren();
     }
-
-
 
     public static Map<Integer, Integer> getInventoryItemsMap(final List<Integer> itemIds, Client client)
     {
@@ -86,5 +84,8 @@ public class InventoryUtils {
 
         return items != null && !items.isEmpty() && items.size() == itemIds.size();
     }
+
+
+
 
 }
