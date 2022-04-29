@@ -9,20 +9,29 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.*;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import net.runelite.api.*;
+import net.runelite.api.events.GameStateChanged;
+import net.runelite.client.chat.ChatColorType;
+import net.runelite.client.chat.ChatMessageBuilder;
+import net.runelite.client.chat.ChatMessageManager;
+import net.runelite.client.chat.QueuedMessage;
+import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.plugins.externals.api.iWidget;
+import net.runelite.client.plugins.externals.ui.LegacyMenuEntry;
+import net.runelite.client.plugins.externals.ui.MenuUtils;
 import org.jetbrains.annotations.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.DecorativeObject;
-import net.runelite.api.GameObject;
-import net.runelite.api.GroundObject;
-import net.runelite.api.Point;
-import net.runelite.api.TileObject;
-import net.runelite.api.WallObject;
 import net.runelite.api.queries.DecorativeObjectQuery;
 import net.runelite.api.queries.GameObjectQuery;
 import net.runelite.api.queries.GroundObjectQuery;
@@ -36,18 +45,36 @@ import net.runelite.client.plugins.PluginDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.pf4j.Extension;
 
+
 @Extension
 @PluginDescriptor(
-	name = "ExtUtils",
+	name = "FreshUtils",
 	hidden = true
 )
+
 @Slf4j
 @SuppressWarnings("unused")
 @Singleton
-public class ExtUtils extends Plugin
+public class FreshUtils extends Plugin
 {
 	@Inject
+	@Getter(AccessLevel.PUBLIC)
 	private Client client;
+
+	@Inject
+	private MenuUtils menu;
+
+	@Inject
+	private MouseUtils mouse;
+
+	@Inject
+	private ActionQueue action;
+
+	@Inject
+	private ChatMessageManager chatMessageManager;
+
+	@Inject
+	public FreshConfig config;
 
 	@Override
 	protected void startUp()
@@ -80,6 +107,17 @@ public class ExtUtils extends Plugin
 			.idEquals(ids)
 			.result(client)
 			.nearestTo(client.getLocalPlayer());
+	}
+
+	@Subscribe
+	public void onGameStateChanged(GameStateChanged gameStateChanged) {
+		if (gameStateChanged.getGameState() != GameState.LOGGED_IN && gameStateChanged.getGameState() != GameState.CONNECTION_LOST) {
+			objects.clear();
+			npcs.clear();
+			tileItems.clear();
+			bankitems.clear();
+			bankInventoryitems.clear();
+		}
 	}
 
 	@Nullable
@@ -129,6 +167,12 @@ public class ExtUtils extends Plugin
 			.result(client)
 			.nearestTo(client.getLocalPlayer());
 	}
+
+	public final static Set<TileObject> objects = new HashSet<>();
+	public final static Set<TileItem> tileItems = new HashSet<>();
+	public final static Set<NPC> npcs = new HashSet<>();
+	public final static List<iWidget> bankitems = new ArrayList<>();
+	public final static List<iWidget> bankInventoryitems = new ArrayList<>();
 
 	public List<GameObject> getGameObjects(int... ids)
 	{
@@ -405,5 +449,71 @@ public class ExtUtils extends Plugin
 		);
 
 		client.getCanvas().dispatchEvent(e);
+	}
+
+	public void sendGameMessage(String message) {
+		String chatMessage = new ChatMessageBuilder()
+				.append(ChatColorType.HIGHLIGHT)
+				.append(message)
+				.build();
+
+		chatMessageManager
+				.queue(QueuedMessage.builder()
+						.type(ChatMessageType.CONSOLE)
+						.runeLiteFormattedMessage(chatMessage)
+						.build());
+	}
+
+	public static void sleep(int toSleep) {
+		try {
+			long start = System.currentTimeMillis();
+			Thread.sleep(toSleep);
+
+			// Guarantee minimum sleep
+			long now;
+			while (start + toSleep > (now = System.currentTimeMillis())) {
+				Thread.sleep(start + toSleep - now);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void doActionMsTime(LegacyMenuEntry entry, Rectangle rect, long timeToDelay) {
+		Point point = mouse.getClickPoint(rect);
+		doActionMsTime(entry, point, timeToDelay);
+	}
+
+	public void doActionMsTime(LegacyMenuEntry entry, Point point, long timeToDelay) {
+		Runnable runnable = () -> {
+			menu.setEntry(entry);
+			mouse.handleMouseClick(point);
+		};
+
+		action.delayTime(timeToDelay, runnable);
+	}
+
+	public static void sleep(long time) {
+		if (time > 0) {
+			try {
+				Thread.sleep(time);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);// todo
+			}
+		}
+	}
+
+	public static byte[] gzip(byte[] bytes) throws IOException {
+		var baos = new ByteArrayOutputStream();
+
+		try (var gzip = new GZIPOutputStream(baos)) {
+			gzip.write(bytes);
+		}
+
+		return baos.toByteArray();
+	}
+
+	public static byte[] ungzip(byte[] bytes) throws IOException {
+		return new GZIPInputStream(new ByteArrayInputStream(bytes)).readAllBytes();
 	}
 }

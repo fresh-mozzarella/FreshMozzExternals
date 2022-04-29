@@ -6,6 +6,7 @@ project.extra["PluginName"] = "FarmRun"
 project.extra["PluginDescription"] = "Does farming runs for you."
 
 dependencies {
+    implementation(project(":FreshUtils"))
 }
 
 tasks {

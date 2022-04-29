@@ -27,7 +27,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.bank.BankSearch;
-import net.runelite.client.plugins.externals.ExtUtils;
+import net.runelite.client.plugins.externals.FreshUtils;
 import net.runelite.client.util.HotkeyListener;
 import org.apache.commons.lang3.StringUtils;
 import org.pf4j.Extension;
@@ -45,7 +45,7 @@ import static net.runelite.client.plugins.externals.presetmanager.WidgetUtils.*;
 )
 @Slf4j
 @SuppressWarnings("unused")
-@PluginDependency(ExtUtils.class)
+@PluginDependency(FreshUtils.class)
 public class PresetManager extends Plugin
 {
 	private static final Splitter NEWLINE_SPLITTER = Splitter
@@ -84,7 +84,7 @@ public class PresetManager extends Plugin
 	private EventBus eventBus;
 
 	@Inject
-	private ExtUtils utils;
+	private FreshUtils utils;
 
 	private ExecutorService executor;
 	private Robot robot;
