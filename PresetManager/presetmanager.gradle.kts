@@ -30,7 +30,7 @@ project.extra["PluginName"] = "PresetManager"
 project.extra["PluginDescription"] = "Manage and equip presets from the bank interface."
 
 dependencies {
-    implementation(project(":FreshUtils"))
+    compileOnly(project(":FreshUtils"))
     implementation("org.immutables:value:2.8.2")
 }
 
