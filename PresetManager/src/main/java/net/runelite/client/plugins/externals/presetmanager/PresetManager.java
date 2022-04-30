@@ -27,7 +27,6 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.bank.BankSearch;
-import net.runelite.client.plugins.externals.FreshUtils;
 import net.runelite.client.util.HotkeyListener;
 import org.apache.commons.lang3.StringUtils;
 import org.pf4j.Extension;

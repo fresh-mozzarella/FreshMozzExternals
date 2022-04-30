@@ -1,6 +1,7 @@
 package net.runelite.client.plugins.externals.farmrun;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Injector;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
@@ -12,16 +13,13 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.externals.CalculationUtils;
-import net.runelite.client.plugins.externals.FreshUtils;
-import net.runelite.client.plugins.externals.MouseUtils;
 import net.runelite.client.plugins.externals.farmrun.patchteleportmethods.FaladorPatch;
-import net.runelite.client.plugins.externals.api.ContainerUtils;
-import net.runelite.client.plugins.externals.api.LegacyInventoryAssistant;
-import net.runelite.client.plugins.externals.ui.LegacyMenuEntry;
-import net.runelite.client.plugins.externals.ui.MenuUtils;
+import net.runelite.client.plugins.iutils.ContainerUtils;
+import net.runelite.client.plugins.iutils.FreshUtils;
+import net.runelite.client.plugins.iutils.InventoryUtils;
+import net.runelite.client.plugins.iutils.LegacyMenuEntry;
+import net.runelite.client.plugins.iutils.util.LegacyInventoryAssistant;
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
@@ -36,7 +34,6 @@ import static net.runelite.client.plugins.externals.farmrun.patchteleportmethods
 )
 
 @Slf4j
-@PluginDependency(FreshUtils.class)
 public class FarmRun extends Plugin
 {
     @Inject
@@ -46,31 +43,14 @@ public class FarmRun extends Plugin
     private Client client;
 
     @Inject
+    private InventoryUtils inventory;
+
+    @Inject
     private FreshUtils utils;
 
-    @Inject
-    private ContainerUtils containerUtils;
 
-    @Inject
-    private MouseUtils mouse;
-
-    @Inject
-    private CalculationUtils calc;
-
-    @Inject
-    private MenuUtils menu;
-
-    private LegacyInventoryAssistant legacyInventoryAssistant;
-
-    private LegacyMenuEntry entry;
-
-    private long sleepDelay() {
-        sleepLength = calc.randomDelay(config.sleepWeightedDistribution(), config.sleepMin(), config.sleepMax(), config.sleepDeviation(), config.sleepTarget());
-        return sleepLength;
-    }
 
     boolean startFarmRun;
-    long sleepLength;
 
     @Provides
     FarmRunConfig provideConfig(ConfigManager configManager)
@@ -102,7 +82,6 @@ public class FarmRun extends Plugin
                     if (((EXPLORERS_RINGS.stream().anyMatch(item-> containerUtils.hasItem(item, client))))
                             && (client.getLocalPlayer().getWorldLocation().getRegionID() != FaladorPatch.EXPLORERS_RING.getRegionID())) {
                             int item = ContainerUtils.getInventoryItemsMap(EXPLORERS_RINGS, client).keySet().stream().findFirst().orElse(-1);
-                            int id = legacyInventoryAssistant.itemOptionToId(item, "Teleport");
                         WidgetItem explorersring = containerUtils.getWidgetItem(item);
                             entry = new LegacyMenuEntry("Teleport", "", id, MenuAction.CC_OP, 0, WidgetInfo.INVENTORY.getId(), false);
                             menu.setEntry(entry);
